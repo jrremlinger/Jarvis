@@ -1,0 +1,7 @@
+Input:
+	1. Start as text based entry.
+	2. Make inputs as flexible as possible, most like with ML.
+	3. Eventually make voice interface, with text as a mostly hidden option.
+How-To:
+	Flask interface running from a single server that can be accessed using accessed
+	from a pin number.

@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background: linear-gradient(to bottom right, #CDE, #BCD);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#titlebar {
+	display: flex;
+	align-items: center;
+	height: 5vh;
+	margin: 0 auto;
+	padding: 0 1em;
+	background: linear-gradient(to bottom right, #2E9, #0B7);
+	border: 0.1em #184 solid;
+}
+
+#main {
+ display: flex;
+}
+
+#navpanel {
+	background-color: wheat;
+	padding: 1em 2em;
+	height: 95vh;
+	overflow-y: scroll;
+}
+
+#displayzone {
+
+}
+
+.fakewindowtest {
+
+}
