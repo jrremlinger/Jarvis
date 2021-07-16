@@ -1,7 +1,13 @@
-Input:
-	1. Start as text based entry.
-	2. Make inputs as flexible as possible, most like with ML.
-	3. Eventually make voice interface, with text as a mostly hidden option.
-How-To:
-	Flask interface running from a single server that can be accessed using accessed
-	from a pin number.
+Left Sidebar with expanding drop downs, clicking items toggles them on and off in
+the right-hand "viewing area". The viewing area will be window based and  include "X"
+icons to quickly close something.
+
+Allow username entry and cache it in localstorage.
+
+Include: 
+Dedicated Settings button with no tab: Color and font customization
+ToxicUtility (Maybe rename this lol) in Tools tab
+Userinfo in Social tab
+Chatterbox in Social tab
+Checkers in Games tab
+Tic Tac Toe in games tab
