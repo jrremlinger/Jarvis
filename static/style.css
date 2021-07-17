@@ -4,10 +4,11 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	user-select: none;
 }
 
 html {
-	background: linear-gradient(to bottom right, #CDE, #BCD);
+	background: linear-gradient(to bottom right, #FFF, #999);
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -15,28 +16,106 @@ html {
 #titlebar {
 	display: flex;
 	align-items: center;
+	justify-content: baseline;
+	text-align: center;
 	height: 5vh;
 	margin: 0 auto;
 	padding: 0 1em;
-	background: linear-gradient(to bottom right, #2E9, #0B7);
-	border: 0.1em #184 solid;
+	background: linear-gradient(to bottom right, #EEE, #AAA);
+	border: 0.15em #FFF solid;
+	font-weight: bolder;
 }
 
 #main {
- display: flex;
-}
+	display: flex;
+ }
 
 #navpanel {
-	background-color: wheat;
+	background-color: #888;
 	padding: 1em 2em;
 	height: 95vh;
+	width: 17em;
 	overflow-y: scroll;
 }
 
-#displayzone {
-
+.collapsible {
+	background-color: #FFF;
+	cursor: pointer;
+	padding: 0.5em;
+	width: 100%;
+	border: none;
+	font-weight: bolder;
 }
 
-.fakewindowtest {
+.collactive, .collapsible:hover {
+	background-color: #666;
+	color: white
+}
 
+.collapsible:after {
+	content: '\02795';
+	color: white;
+	float: right;
+	margin-right: 0.5em;
+}
+
+.collactive::after {
+	content: '\2796';
+}
+
+.collapselist {
+	display: none;
+	overflow: hidden;
+	width: 85%;
+	margin: 0 auto;
+}
+
+.collapselist p {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 0.5em;
+	border: 0.115em dashed #AAA;
+	color: #FFF;
+	border-top: none;
+	background-color: #333;
+}
+
+#displayzone {
+	padding: 2em;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin: 0 auto;
+}
+
+.window {
+	/* display: none; */
+	background-color: #FFF;
+	margin: 0;
+	height: fit-content;
+	border: 0.1em solid black;
+}
+
+.windowtitlebar {
+	display: flex;
+	justify-content: space-between;
+	background-color: #FFF;
+	padding: 0.5em;
+	padding-bottom: 0;
+	border-bottom: 0.1em solid black;
+}
+
+.windowclosebtn {
+	position: relative;;
+	bottom: 0.2em;
+}
+
+.windowclosebtn:hover ~ .windowtitlebar {
+	background-color: #E55;
+}
+
+.windowcontent {
+	padding: 0.5em;
 }

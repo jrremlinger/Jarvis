@@ -6,25 +6,32 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>J.A.R.V.I.S</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="../static/style.css">
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
 	<div id="titlebar">J.A.R.V.I.S</div>
 	<div id="main">
 		<div id="navpanel">
-			<ul>
-				<li>boob</li>
-				<li>boob</li>
-				<li>boob</li>
-				<li>boob</li>
-			</ul>
+			<div class="collapsible">Tools</div>
+			<div class="collapselist">
+				<p>Amnesia (Library)</p>
+			</div>
+			<div type="button" class="collapsible">Social</div>
+			<div class="collapselist">
+				<p>Chatterbox</p>
+			</div>
+			<div type="button" class="collapsible">Games</div>
+			<div class="collapselist">
+				<p>Checkers</p>
+				<p>Tic Tac Toe</p>
+			</div>
 		</div>
-		<div id="displayzone">
-			<div class="fakewindowtest">AAAAAAAA</div>
-		</div>
+		<div id="displayzone"></div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js" integrity="sha512-iZIBSs+gDyTH0ZhUem9eQ1t4DcEn2B9lHxfRMeGQhyNdSUz+rb+5A3ummX6DQTOIs1XK0gOteOg/LPtSo9VJ+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+	<script type="text/javascript" src="../static/script.js"></script>
 </body>
 </html>
