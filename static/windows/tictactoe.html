@@ -1,0 +1,153 @@
+<style>
+	#ttt_container {
+		width: 290px;
+		height: 290px;
+		box-sizing: border-box;
+		/* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+	}
+
+	#ttt_gameArea {
+		display: flex;
+		justify-content: center;
+		width: 90%;
+		margin: 0 auto;
+		padding: 1rem;
+		user-select: none;
+	}
+
+	.ttt_box {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.ttt_title {
+		font-size: 2rem;
+		text-align: center;
+	}
+
+	#ttt_reset {
+		text-align: center;
+		font-size: 26px;
+		border: 2px solid black;
+		display: inline;
+		cursor: pointer;
+		padding: 3px 9px;
+	}
+
+	#ttt_textArea {
+		text-align: center;
+		font-size: 1.5rem;
+	}
+
+	.ttt_tile {
+		width: 48px;
+		height: 48px;
+		border: 1px solid black;
+		text-align: center;
+		font-size: 35px;
+		cursor: pointer;
+	}
+
+	#ttt_t0, #ttt_t1, #ttt_t2 {
+		border-left: none;
+	}
+	#ttt_t0, #ttt_t3, #ttt_t6 {
+		border-top: none;
+	}
+	#ttt_t6, #ttt_t7, #ttt_t8 {
+		border-right: none;
+	}
+	#ttt_t2, #ttt_t5, #ttt_t8 {
+		border-bottom: none;
+	}
+</style>
+<div id="ttt_container">
+	<h1 class="ttt_title">Tic-Tac-Toe</h1>
+	<div id="ttt_textArea"></div>
+	<div id="ttt_gameArea">
+		<div class="ttt_col" id="ttt_c1">
+			<div class="ttt_tile" id="ttt_t0"></div>
+			<div class="ttt_tile" id="ttt_t1"></div>
+			<div class="ttt_tile" id="ttt_t2"></div>
+		</div>
+		<div class="ttt_col" id="ttt_c2">
+			<div class="ttt_tile" id="ttt_t3"></div>
+			<div class="ttt_tile" id="ttt_t4"></div>
+			<div class="ttt_tile" id="ttt_t5"></div>
+		</div>
+		<div class="ttt_col" id="ttt_c3">
+			<div class="ttt_tile" id="ttt_t6"></div>
+			<div class="ttt_tile" id="ttt_t7"></div>
+			<div class="ttt_tile" id="ttt_t8"></div>
+		</div>
+	</div>
+	<div class="ttt_box">
+		<div id="ttt_reset" onclick="ttt_init()">Restart?</div>
+	</div>
+</div>
+<script>
+	ttt_tiles = [];
+	ttt_text = document.querySelector("#ttt_textArea");
+	ttt_turn = undefined;
+	ttt_reset = document.querySelector("#ttt_reset");
+	ttt_gameOver = undefined;
+
+	ttt_clickTile = function(x) {
+		if (!ttt_gameOver) {
+			let tID = x.id.substring(5);
+			if (ttt_tiles[tID].textContent == "") {
+				ttt_tiles[tID].textContent = ttt_turn ? "X" : "O";
+				ttt_text.textContent = `It is ${(ttt_turn = !ttt_turn) ? "X" : "O"}'s turn!`;
+			}
+			ttt_check();
+		}
+	}
+
+	ttt_check = function() {
+		let flag1 = false;
+		let flag2 = undefined;
+		let flag3 = undefined;
+		let cTile = "O";
+
+		for (let i = 0; i < 2; i++) {
+			if (ttt_tiles[0].textContent == cTile && ttt_tiles[1].textContent == cTile && ttt_tiles[2].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			else if (ttt_tiles[3].textContent == cTile && ttt_tiles[4].textContent == cTile && ttt_tiles[5].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			else if (ttt_tiles[6].textContent == cTile && ttt_tiles[7].textContent == cTile && ttt_tiles[8].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			else if (ttt_tiles[0].textContent == cTile && ttt_tiles[3].textContent == cTile && ttt_tiles[6].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			else if (ttt_tiles[1].textContent == cTile && ttt_tiles[4].textContent == cTile && ttt_tiles[7].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			else if (ttt_tiles[2].textContent == cTile && ttt_tiles[5].textContent == cTile && ttt_tiles[8].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			else if (ttt_tiles[0].textContent == cTile && ttt_tiles[4].textContent == cTile && ttt_tiles[8].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			else if (ttt_tiles[2].textContent == cTile && ttt_tiles[4].textContent == cTile && ttt_tiles[6].textContent == cTile) { flag1 = true; flag2 = cTile; }
+			cTile = "X";
+		}
+		
+		if (!flag1) {
+			flag3 = true;
+			for (tile of ttt_tiles) { if (tile.textContent == "") { flag3 = false; } }
+		}
+
+		if (flag1 || flag3) {
+			ttt_gameOver = true;
+			ttt_reset.style.display = "inline";
+
+			if (flag1) { ttt_text.textContent = `${flag2}'s won the game!`; }
+			else if (flag3) { ttt_text.textContent = `Stalemate!`; }
+		}
+	}
+
+	ttt_init = function() {
+		ttt_gameOver = false;
+		ttt_reset.style.display = "none";
+		ttt_tiles = [];
+		for (tile of document.querySelectorAll(".ttt_tile")) {
+			tile.textContent = "";
+			tile.setAttribute("onclick", `ttt_clickTile(${tile.id})`);
+			ttt_tiles.push(tile);
+		}
+		ttt_turn = Math.floor(Math.random() * 2)
+		ttt_text.textContent = `It is ${ttt_turn ? "X" : "O"}'s turn!`;
+	}
+
+	ttt_init();
+</script>

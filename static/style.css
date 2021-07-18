@@ -1,10 +1,11 @@
 *,
 *::before,
 *::after {
+	-webkit-text-size-adjust: 100%;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	user-select: none;
+	font-family: 'Courier New', Courier, monospace;
 }
 
 html {
@@ -15,52 +16,74 @@ html {
 
 #titlebar {
 	display: flex;
-	align-items: center;
-	justify-content: baseline;
-	text-align: center;
+	justify-content: space-between;
 	height: 5vh;
 	margin: 0 auto;
-	padding: 0 1em;
 	background: linear-gradient(to bottom right, #EEE, #AAA);
-	border: 0.15em #FFF solid;
 	font-weight: bolder;
+	font-size: large;
+	user-select: none;
+}
+
+#titlebar p {
+	float: right;
+	padding: 1.5vh 1rem;
+}
+
+#navvis {
+	min-width: 13rem;
+	cursor: pointer;
+	background: linear-gradient(to bottom, #EEE, #888);
+	font-size: 3.5vh;
+	font-weight: 100;
+	border-radius: 0 50px 0 0;
+}
+
+#navvis:hover {
+	background: linear-gradient(to bottom, #DDD, #888);
+}
+
+#navvis p {
+	text-align: center;
+	margin: 0 auto;
+	width: 100%;
+	padding: 0;
 }
 
 #main {
 	display: flex;
- }
+}
 
 #navpanel {
-	background-color: #888;
-	padding: 1em 2em;
+	background: linear-gradient(to bottom, #888, #555);
+	padding: 1rem;
 	height: 95vh;
-	width: 17em;
-	overflow-y: scroll;
+	min-width: 13rem;
+	overflow-y: auto;
+	user-select: none;
+	display: none;
 }
 
 .collapsible {
 	background-color: #FFF;
 	cursor: pointer;
-	padding: 0.5em;
+	padding: 0.5rem;
 	width: 100%;
 	border: none;
 	font-weight: bolder;
 }
 
-.collactive, .collapsible:hover {
+.collapsible:hover {
+	background-color: #BBB;
+}
+
+.collactive {
 	background-color: #666;
-	color: white
+	color: #FFF;
 }
 
-.collapsible:after {
-	content: '\02795';
-	color: white;
-	float: right;
-	margin-right: 0.5em;
-}
-
-.collactive::after {
-	content: '\2796';
+.collactive:hover {
+	background-color: #454545;
 }
 
 .collapselist {
@@ -75,47 +98,65 @@ html {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	padding: 0.5em;
-	border: 0.115em dashed #AAA;
-	color: #FFF;
+	padding: 0.5rem;
+	border: 0.115rem dashed #AAA;
+	color: #F44;
 	border-top: none;
 	background-color: #333;
+	cursor: pointer;
+}
+
+.collapselist p:hover {
+	background-color: #151515;
 }
 
 #displayzone {
-	padding: 2em;
+	padding: 2rem;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	margin: 0 auto;
+	height: 95vh;
+	overflow-y: auto;
+	width: 100%;
 }
 
 .window {
-	/* display: none; */
 	background-color: #FFF;
-	margin: 0;
+	margin: 1rem;
 	height: fit-content;
-	border: 0.1em solid black;
+	border: 0.1rem solid black;
+	min-width: 10rem;
+	max-width: 25rem;
+	width: fit-content;
+	max-height: 25rem;
+	height: fit-content;
 }
 
 .windowtitlebar {
+	font-weight: bolder;
 	display: flex;
 	justify-content: space-between;
 	background-color: #FFF;
-	padding: 0.5em;
+	padding: 0.5rem;
 	padding-bottom: 0;
-	border-bottom: 0.1em solid black;
+	border-bottom: 0.1rem solid black;
+	user-select: none;
 }
 
 .windowclosebtn {
+	cursor: pointer;
 	position: relative;;
-	bottom: 0.2em;
+	bottom: 0.2rem;
 }
 
-.windowclosebtn:hover ~ .windowtitlebar {
-	background-color: #E55;
+.windowclosebtn:hover {
+	color: #E55;
 }
 
 .windowcontent {
-	padding: 0.5em;
+	padding: 0.5rem;
+	user-select: auto;
+	overflow: auto;
+	max-height: 22.5rem;
 }
