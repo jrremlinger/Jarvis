@@ -1,0 +1,97 @@
+<style>
+#pchat_container {
+	margin: 0;
+	padding: 0;
+	/* border: 0 none; */
+	/* outline: none; */
+	box-sizing: border-box;
+}
+
+#pchat_chatbox {
+	width: 310px;
+	height: 170px;
+	margin: 0 auto;
+	border: 1px solid;
+	overflow: auto;
+	padding: 0 10px;
+	font-size: 13px;
+}
+
+#pchat_container form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+#pchat_container form * {
+	margin: 5px;
+	padding: 0.5em;
+	font-size: 12px;
+}
+</style>
+<div id="pchat_container">
+	<h2 style="text-align: center;">
+		Public Chat
+		<span style="color: #424242; font-size: 12px;"> Admin</span>
+	</h2>
+	<div id="pchat_chatbox"></div>
+	<form action="" method="POST">
+		<input type="text" class="pchat_username" placeholder="Username">
+		<input type="text" class="pchat_message" placeholder="Message">
+		<input type="submit" value="Send">
+	</form>
+</div>
+<script>
+	socket.emit('pchat_event', {
+		'session_id': session_id,
+		'data': 'User Connected'
+	});
+
+	pchat_getFormData = function(className) {
+		return $(`input.${className}`).val().replace(/[^\x00-\x7F]/g, '');;
+	}
+
+	$('form').on('submit', function(e) {
+		e.preventDefault();	// Prevents the default function of submitting the form
+
+		// Get username and message from the DOM
+		let pchat_username = pchat_getFormData('pchat_username');
+		let pchat_msg = pchat_getFormData('pchat_message');
+
+		// Sends form data to the server
+		if (pchat_username !== "" && pchat_msg !== "" && pchat_username[0] !== ' ' && pchat_msg[0] !== ' ') {	// Check for valid username and message
+			socket.emit('pchat_event', {
+				'session_id': session_id,
+				'user': pchat_username,
+				'msg': pchat_msg
+			});
+		}
+
+		$('input.pchat_message').val('').focus();	// Clears message box and focuses on it to allow for more input
+	});
+
+	pchat_loadResponse = function(log) {
+		if (log.length > 0) {
+			$('#pchat_chatbox').empty();
+
+			for (i in log) {
+				if (typeof log[i].user !== typeof(undefined)) {
+					$('#pchat_chatbox').append(`<div><b>${log[i].user} [${i}]</b>: ${log[i].msg}`);
+					$('#pchat_chatbox').scrollTop($('#pchat_chatbox')[0].scrollHeight);
+				}
+			}
+		}
+		else {
+			$('#pchat_chatbox').empty();
+			$('#pchat_chatbox').append(`
+				<i style="text-decoration: underline;">
+					The start of a fresh chat! Make yourself at home :)
+				</i>`
+			);
+		}
+	}
+
+	// Runs when the client receives the chat log from the server
+	socket.on('pchat_response', function(log) { pchat_loadResponse(log) });
+</script>

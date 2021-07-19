@@ -5,15 +5,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>J.A.R.V.I.S</title>
-	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
-	<link rel="stylesheet" href="../static/style.css">
-	<!-- <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"> -->
-	<link rel="shortcut icon" href="../static/favicon.ico">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<!-- <link rel="stylesheet" href="../static/style.css"> -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<!-- <link rel="shortcut icon" href="../static/favicon.ico"> -->
 </head>
 <body>
 	<div id="titlebar">
 		<!-- &#11163; -->
-		<div id="navvis" onclick="togglenav()"><p>&#5123;</p></div>
+		<div id="navbtn" onclick="togglenav()"><p>&#5123;</p></div>
 		<p>J.A.R.V.I.S</p></div>
 	<div id="main">
 		<div id="navpanel"></div>
@@ -21,7 +21,18 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js" integrity="sha512-iZIBSs+gDyTH0ZhUem9eQ1t4DcEn2B9lHxfRMeGQhyNdSUz+rb+5A3ummX6DQTOIs1XK0gOteOg/LPtSo9VJ+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<!-- <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script> -->
-	<script type="text/javascript" src="../static/script.js"></script>
+	<script type="text/javascript">let session_id = "{{ key }}"</script>
+	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+	<!-- <script type="text/javascript" src="../static/script.js"></script> -->
+	{% if admin %}
+	<script type="text/javascript">
+		windows[2] = {
+			title : 'Public Chat',
+			link : '../static/windows/pubchat_admin.html',
+			category : 'Social',
+			hidden : true
+		}
+	</script>
+	{% endif %}
 </body>
 </html>

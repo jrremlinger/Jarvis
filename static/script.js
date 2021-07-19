@@ -2,7 +2,11 @@ let navhide = true;
 let togglenav = function () {
 	navhide = !navhide;
 	$('#navpanel').css('display', navhide ? 'none' : 'block');
-	$('#navvis p').html(navhide ? '&#5123;' : '&#5121;')
+	$('#navbtn p').html(navhide ? '&#5123;' : '&#5121;')
+	if (navhide)
+		$('#navbtn').css('border-bottom-right-radius', '50px');
+	else
+		$('#navbtn').css('border-bottom-right-radius', '0');
 }
 
 let windows = [
@@ -16,11 +20,11 @@ let windows = [
 		title : 'Tic Tac Toe',
 		link : '../static/windows/tictactoe.html',
 		category : 'Games',
-		hidden : false
+		hidden : true
 	},
 	{
-		title : 'J-Chat',
-		link : '../static/windows/j-chat.html',
+		title : 'Public Chat',
+		link : '../static/windows/pubchat.html',
 		category : 'Social',
 		hidden : true
 	},
@@ -106,31 +110,19 @@ let buildUI = async function(skipNav = false) {
 let socket = io.connect('http://' + document.domain + ':' + location.port);
 
 socket.on('connect', function() {
-	socket.emit('from-client', { 'system' : 'User Connected' });
+	socket.emit('from-client', { 'system': 'User Connected' });
 	
-	$('form').on('submit', function(e) {
-		e.preventDefault();
-		let myinput = $('#input').val();
-		if (myinput !== "" && myinput !== ' ') { socket.emit('from-client', { 'input' : myinput }); }
-		$('#input').val('');
-	});
+	// $('form').on('submit', function(e) {
+	// 	e.preventDefault();
+	// 	let myinput = $('#input').val();
+	// 	if (myinput !== "" && myinput !== ' ') { socket.emit('from-client', { 'input' : myinput }); }
+	// 	$('#input').val('');
+	// });
 });
 
-socket.on('from-server', function(str) {
-	console.log(str);
-})
+// socket.on('from-server', function(str) {
+// 	console.log(str);
+// })
 
 // Let there be light!
 buildUI();
-
-fakewin = function() {
-	$('#displayzone').html(`
-		<div class="window" id="winID9" style="display: block;">
-			<div class="windowtitlebar">
-				<p>Test Window</p>
-				<div class="windowclosebtn" onclick="toggleWindow(9)">&#10005</div>
-			</div>
-			<div class="windowcontent"></div>
-		</div>`
-	);
-}

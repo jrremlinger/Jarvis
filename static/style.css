@@ -17,7 +17,8 @@ html {
 #titlebar {
 	display: flex;
 	justify-content: space-between;
-	height: 5vh;
+	align-items: center;
+	height: 47px;
 	margin: 0 auto;
 	background: linear-gradient(to bottom right, #EEE, #AAA);
 	font-weight: bolder;
@@ -27,23 +28,24 @@ html {
 
 #titlebar p {
 	float: right;
-	padding: 1.5vh 1rem;
+	padding: 0 1rem;
 }
 
-#navvis {
+#navbtn {
 	min-width: 13rem;
 	cursor: pointer;
 	background: linear-gradient(to bottom, #EEE, #888);
-	font-size: 3.5vh;
+	font-size: 1.8rem;
 	font-weight: 100;
-	border-radius: 0 50px 0 0;
+	border-radius: 0 50px 50px 0;
+	height: 47px;
 }
 
-#navvis:hover {
+#navbtn:hover {
 	background: linear-gradient(to bottom, #DDD, #888);
 }
 
-#navvis p {
+#navbtn p {
 	text-align: center;
 	margin: 0 auto;
 	width: 100%;
@@ -57,11 +59,12 @@ html {
 #navpanel {
 	background: linear-gradient(to bottom, #888, #555);
 	padding: 1rem;
-	height: 95vh;
+	height: calc(100vh - 47px);
 	min-width: 13rem;
 	overflow-y: auto;
 	user-select: none;
 	display: none;
+	position: absolute;
 }
 
 .collapsible {
@@ -111,12 +114,12 @@ html {
 }
 
 #displayzone {
-	padding: 2rem;
+	padding: 5px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	margin: 0 auto;
-	height: 95vh;
+	height: calc(100vh - 47px);
 	overflow-y: auto;
 	width: 100%;
 }
@@ -127,9 +130,9 @@ html {
 	height: fit-content;
 	border: 0.1rem solid black;
 	min-width: 10rem;
-	max-width: 25rem;
+	max-width: 32rem;
 	width: fit-content;
-	max-height: 25rem;
+	max-height: 32rem;
 	height: fit-content;
 }
 
@@ -137,7 +140,7 @@ html {
 	font-weight: bolder;
 	display: flex;
 	justify-content: space-between;
-	background-color: #FFF;
+	background-color: #D5D5D5;
 	padding: 0.5rem;
 	padding-bottom: 0;
 	border-bottom: 0.1rem solid black;
